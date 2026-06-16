@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 
 import { Command } from 'commander';
+import { getUser } from './commands/search-user.js';
 
 const cli = new Command();
 
@@ -11,10 +12,11 @@ cli
 
 
 cli
-    .command("user")
+    .command("user <user>")
     .description("Return a user")
-    .action(()=>{
-        console.log("garota isso é um teste");
+    .action(async (user)=>{
+        const data = await getUser(user);
+        console.log(data);
     })
 
 cli.parse();
