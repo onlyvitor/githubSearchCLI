@@ -1,0 +1,12 @@
+#!/usr/bin/env node
+
+import { Command } from 'commander';
+
+const cli = new Command();
+
+cli
+    .name('gitsearch')
+    .description('Return a search from github api')
+    .version('0.0.1');
+
+cli.parse();
