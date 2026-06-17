@@ -10,3 +10,11 @@ export async function getUser(user){
     }
 }
 
+export async function getUserActivity(user) {
+    try{
+        const response = await axios.get(`https://api.github.com/users/${user}/events`);
+        return response.data;
+    }catch(error){
+        return console.log(error);
+    }
+}

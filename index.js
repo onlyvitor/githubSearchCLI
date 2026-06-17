@@ -1,9 +1,10 @@
 #!/usr/bin/env node
 
 import { Command } from 'commander';
-import { getUser } from './commands/search-user.js';
+import { getUser, getUserActivity } from './commands/search-user.js';
 
 const cli = new Command();
+const options = cli.opts();
 
 cli
     .name('gitsearch')
@@ -14,9 +15,15 @@ cli
 cli
     .command("user <user>")
     .description("Return a user")
-    .action(async (user)=>{
+    .option("-A, --activity", "return the activity of specific user")
+    .action(async (user, options) => {
+        if (options.activity) {
+            const activity = await getUserActivity(user);
+            return console.log(activity);
+        }
+
         const data = await getUser(user);
-        console.log(data);
-    })
+        return console.log(data);
+    });
 
 cli.parse();
