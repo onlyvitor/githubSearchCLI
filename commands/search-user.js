@@ -1,5 +1,5 @@
 import axios from "axios";
-import { formatUser } from "../utils/formatter.js";
+import { formatUser, formatUserActivity } from "../utils/formatter.js";
 
 export async function getUser(user){
     try{
@@ -13,7 +13,7 @@ export async function getUser(user){
 export async function getUserActivity(user) {
     try{
         const response = await axios.get(`https://api.github.com/users/${user}/events`);
-        return response.data;
+        return formatUserActivity(response.data);
     }catch(error){
         return console.log(error);
     }

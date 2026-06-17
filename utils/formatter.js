@@ -12,3 +12,13 @@ export function formatUser(user){
 
     return `${name} (${login})\n${bio}\n${location}\n${followers} | ${following} | ${publicRepos}`;
 }
+
+
+export function formatUserActivity(userActivity){
+    return userActivity.map(activity => {
+        const type = chalk.bold.blue(activity.type);
+        const repo = chalk.bold.green(activity.repo.name);
+        const createdAt = chalk.italic.yellow(new Date(activity.created_at).toLocaleString());
+        return `${type} at ${repo} on ${createdAt}`;
+    }).join('\n');
+}
